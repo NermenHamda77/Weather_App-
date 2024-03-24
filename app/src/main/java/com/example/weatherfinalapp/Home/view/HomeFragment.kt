@@ -190,6 +190,9 @@ private lateinit var weekHomeAdapter: WeekHomeAdapter1
                 }
             }
         }
+        /*
+
+         */
 
         if (ActivityCompat.checkSelfPermission(
                 requireContext(),
