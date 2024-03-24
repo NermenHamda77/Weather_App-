@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/darkOlor"
+    tools:context=".Settings.view.SettingsFragment">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:id="@+id/tv_home_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/lobster"
+            android:text="@string/settings_title"
+            android:textColor="@color/startColor"
+            android:textSize="38sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <GridLayout
+            android:id="@+id/ll_settings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:columnCount="2"
+            android:rowCount="3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_home_title">
+
+            <!-- Location -->
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_location_settings"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:backgroundTint="@color/startColor"
+                    android:elevation="8dp"
+                    app:cardCornerRadius="50dp">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lobster"
+                        android:paddingStart="40dp"
+                        android:paddingTop="10dp"
+                        android:paddingEnd="40dp"
+                        android:paddingBottom="10dp"
+                        android:text="@string/location_title"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_location_options_settings"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/startColor"
+                    android:elevation="8dp"
+                    app:cardCornerRadius="30dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:paddingStart="10dp"
+                        android:paddingTop="16dp"
+                        android:paddingEnd="40dp"
+                        android:paddingBottom="16dp">
+
+
+                        <RadioGroup
+                            android:id="@+id/rad2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="start"
+
+                            android:orientation="horizontal"
+                            android:padding="10dp">
+
+                            <RadioButton
+                                android:id="@+id/rbtn_gps_option"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/gps_title"
+                                android:textColor="@color/white" />
+                        </RadioGroup>
+
+                        <RadioGroup
+                            android:id="@+id/rad"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="10dp">
+
+                            <RadioButton
+                                android:id="@+id/rbtn_map_option"
+                                android:layout_width="30dp"
+
+                                android:layout_height="30dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/map_title"
+                                android:textColor="@color/white" />
+                        </RadioGroup>
+
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
+            </LinearLayout>
+
+            <!-- Language -->
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:layout_marginStart="0dp"
+                android:layout_height="wrap_content"
+
+
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_language_settings"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:backgroundTint="@color/startColor"
+                    android:elevation="8dp"
+                    app:cardCornerRadius="50dp">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lobster"
+                        android:paddingStart="40dp"
+                        android:paddingTop="10dp"
+                        android:paddingEnd="40dp"
+                        android:paddingBottom="10dp"
+                        android:text="@string/langage_title"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_language_options_settings"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/startColor"
+                    android:elevation="8dp"
+                    app:cardCornerRadius="30dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:paddingStart="10dp"
+                        android:paddingTop="16dp"
+                        android:paddingEnd="40dp"
+                        android:paddingBottom="16dp">
+
+
+                        <RadioGroup
+                            android:id="@+id/rg_en_settings"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="start"
+
+                            android:orientation="horizontal"
+                            android:padding="10dp">
+
+                            <RadioButton
+                                android:id="@+id/rbtn_english_option"
+                                android:layout_width="30dp"
+
+                                android:layout_height="30dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/english_title"
+                                android:textColor="@color/white" />
+                        </RadioGroup>
+
+                        <RadioGroup
+                            android:id="@+id/rg_ar_settings"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="10dp">
+
+                            <RadioButton
+                                android:id="@+id/rbtn_arabic_option"
+                                android:layout_width="30dp"
+
+                                android:layout_height="30dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/arabic_title"
+                                android:textColor="@color/white" />
+                        </RadioGroup>
+
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="30dp"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_temp_settings"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:backgroundTint="@color/startColor"
+                    android:elevation="8dp"
+                    app:cardCornerRadius="50dp">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lobster"
+                        android:paddingStart="30dp"
+                        android:paddingTop="10dp"
+                        android:paddingEnd="30dp"
+                        android:paddingBottom="10dp"
+                        android:text="@string/temperature_title"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_temp_options_settings"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:backgroundTint="@color/startColor"
+                    android:elevation="8dp"
+                    app:cardCornerRadius="30dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:paddingStart="10dp"
+                        android:paddingTop="16dp"
+                        android:paddingEnd="20dp"
+                        android:paddingBottom="16dp">
+
+
+                        <RadioGroup
+                            android:id="@+id/rg_kelviin_settings"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="start"
+
+                            android:orientation="horizontal"
+                            android:padding="10dp">
+
+                            <RadioButton
+                                android:id="@+id/rbtn_kelvin_option"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/kelvin_title"
+                                android:textColor="@color/white" />
+                        </RadioGroup>
+
+                        <RadioGroup
+                            android:id="@+id/rg_celsius_settings"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="10dp">
+
+                            <RadioButton
+                                android:id="@+id/rbtn_celsius_option"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/celsius_title"
+                                android:textColor="@color/white" />
+                        </RadioGroup>
+
+                        <RadioGroup
+                            android:id="@+id/rg_feh_settings"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="start"
+
+                            android:orientation="horizontal"
+                            android:padding="10dp">
+
+                            <RadioButton
+                                android:id="@+id/rbtn_fahrenheit_option"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/fahrenheit_title"
+                                android:textColor="@color/white" />
+                        </RadioGroup>
+
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
+            </LinearLayout>
+
+            <!-- Language -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginStart="0dp"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_wind_settings"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:backgroundTint="@color/startColor"
+                    android:elevation="8dp"
+                    app:cardCornerRadius="50dp">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lobster"
+                        android:paddingStart="30dp"
+                        android:paddingTop="10dp"
+                        android:paddingEnd="30dp"
+                        android:paddingBottom="10dp"
+                        android:text="@string/wind_speed_title"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_wind_options_settings"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/startColor"
+                    android:elevation="8dp"
+                    app:cardCornerRadius="30dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:paddingStart="10dp"
+                        android:paddingTop="16dp"
+                        android:paddingEnd="20dp"
+                        android:paddingBottom="16dp">
+
+
+                        <RadioGroup
+                            android:id="@+id/met_sec"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="start"
+
+                            android:orientation="horizontal"
+                            android:padding="10dp">
+
+                            <RadioButton
+                                android:id="@+id/rbtn_meter_sec_option"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/meter_sec_title"
+                                android:textColor="@color/white" />
+                        </RadioGroup>
+
+                        <RadioGroup
+                            android:id="@+id/mil_hr"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="10dp">
+
+                            <RadioButton
+                                android:id="@+id/rbtn_mile_hr_option"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:forceHasOverlappingRendering="true" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/mile_hour_title"
+                                android:textColor="@color/white" />
+                        </RadioGroup>
+
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
+            </LinearLayout>
+
+
+            <!-- Notifications -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="30dp"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_notifications_settings"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:backgroundTint="@color/startColor"
+                    android:elevation="8dp"
+                    app:cardCornerRadius="50dp">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lobster"
+                        android:paddingStart="30dp"
+                        android:paddingTop="10dp"
+                        android:paddingEnd="30dp"
+                        android:paddingBottom="10dp"
+                        android:text="@string/notifications_title"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_notifi_options_settings"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginBottom="80dp"
+                    android:backgroundTint="@color/startColor"
+                    android:elevation="8dp"
+                    app:cardCornerRadius="30dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:paddingStart="10dp"
+                        android:paddingTop="16dp"
+                        android:paddingEnd="30dp"
+                        android:paddingBottom="16dp">
+
+
+                        <RadioGroup
+                            android:id="@+id/rg_enable"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="start"
+
+                            android:orientation="horizontal"
+                            android:padding="10dp">
+
+                            <RadioButton
+                                android:id="@+id/rbtn_enable_option"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/enable_title"
+                                android:textColor="@color/white" />
+                        </RadioGroup>
+
+                        <RadioGroup
+                            android:id="@+id/rg_disable"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+
+                            android:padding="10dp">
+
+                            <RadioButton
+                                android:id="@+id/rbtn_disable_option"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:forceHasOverlappingRendering="true" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/disable_title"
+                                android:textColor="@color/white" />
+                        </RadioGroup>
+
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
+            </LinearLayout>
+
+
+        </GridLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:backgroundTint="@color/startColor"
+    android:id="@+id/hourly_loc_dets_card"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="40dp"
+    app:cardElevation="8dp"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:padding="10dp"
+        android:orientation="vertical"
+        android:id="@+id/ll_hourly_card_loc_dets">
+
+        <TextView
+            android:id="@+id/tv_time_hourly_card_loc_dets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10AM"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/ic_launcher_foreground"
+            android:scaleType="centerCrop"
+            android:id="@+id/iv_hourly_card_loc_dets"
+            />
+
+        <TextView
+            android:id="@+id/tv_temp_hourly_card_loc_dets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="30°C"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+
+
+
+    </LinearLayout>
+
+
+
+
+
+</androidx.cardview.widget.CardView>
