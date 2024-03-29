@@ -1,17 +1,13 @@
 package com.example.weatherfinalapp.Alert.view
 
 import com.example.weatherapp.alert.view.AlertViewModel
-import android.Manifest
 import android.app.AlarmManager
 import android.app.DatePickerDialog
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.TimePickerDialog
-import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -22,7 +18,6 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.weatherfinalapp.Alert.viewModel.AlertViewModelFactory
@@ -122,7 +117,7 @@ class DialogAlertActivity : AppCompatActivity() {
         }
 
         group.setOnCheckedChangeListener { _ ,chosen ->
-            var type = findViewById<View>(chosen) as RadioButton
+            val type = findViewById<View>(chosen) as RadioButton
             when(type){
                 notification -> {
                     choosenType = "notification"
@@ -222,7 +217,7 @@ class DialogAlertActivity : AppCompatActivity() {
 
         val timePickerDialog = TimePickerDialog(
             this,
-            TimePickerDialog.OnTimeSetListener { _, selectedHour, selectedMinute ->
+            { _, selectedHour, selectedMinute ->
                 if(value == 1){
                     fromValue.text = String.format("%02d:%02d", selectedHour, selectedMinute)
                 }
@@ -245,7 +240,7 @@ class DialogAlertActivity : AppCompatActivity() {
 
         val datePickerDialog = DatePickerDialog(
             this,
-            DatePickerDialog.OnDateSetListener { _, selectedYear, selectedMonth, selectedDayOfMonth ->
+            { _, selectedYear, selectedMonth, selectedDayOfMonth ->
                 dateValue.text = String.format("%04d-%02d-%02d", selectedYear, selectedMonth + 1, selectedDayOfMonth)
             },
             year,
@@ -282,10 +277,10 @@ class DialogAlertActivity : AppCompatActivity() {
 
         val currentTimeMillis = System.currentTimeMillis()
         val fromTimeMillis = parseTimeToMillis(alert.fromTime)
-        val toTimeMillis = parseTimeToMillis(alert.toTime)
+        //val toTimeMillis = parseTimeToMillis(alert.toTime)
 
         val delay = fromTimeMillis - currentTimeMillis
-        val duration = toTimeMillis - fromTimeMillis
+       // val duration = toTimeMillis - fromTimeMillis
 
         try {
             alarmManager.setExact(
@@ -380,34 +375,3 @@ class DialogAlertActivity : AppCompatActivity() {
 
 
 
-/*
-private fun setAlarm() {
-        alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
-        val intent  = Intent(this , AlertReceiver::class.java)
-        pendingIntent = PendingIntent.getBroadcast(this , 0 , intent , 0)
-        alarmManager.setRepeating(
-            AlarmManager.RTC_WAKEUP,
-            AlarmManager.INTERVAL_DAY,pendingIntent
-        )
-    }
- */
-
-
-/* picker = MaterialTimePicker.Builder()
-            .setTimeFormat(TimeFormat.CLOCK_12H)
-            .setHour(12)
-            .setMinute(0)
-            .setTitleText("Select Alarm Time")
-            .build()
-
-        picker.show(supportFragmentManager, "channelId")
-        picker.addPositiveButtonClickListener{
-            if(picker.hour > 12){
-                fromValue.text =
-
-            }
-        }
-
-*/
-
-/////////////////////////////////////////////
