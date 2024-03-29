@@ -8,7 +8,6 @@ import androidx.fragment.app.FragmentTransaction
 import com.example.weatherfinalapp.Alert.view.AlertFragment
 import com.example.weatherfinalapp.Favorite.view.FavoriteFragment
 import com.example.weatherfinalapp.Home.view.HomeFragment
-import com.example.weatherfinalapp.Map.view.MapFragment
 import com.example.weatherfinalapp.R
 import com.example.weatherfinalapp.Settings.view.SettingsFragment
 import com.example.weatherfinalapp.databinding.ActivityBottomNavigationBinding

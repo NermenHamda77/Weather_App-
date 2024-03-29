@@ -39,24 +39,12 @@ class WeatherRemoteDataSourceImp  private constructor(){
         lon : Double? ,
         units : String? = "metric",
         lang : String? = "en" ,
-        appid : String? = "c687f9659a452c95a84f05c506629873"
+        appid : String? = "c687f9659a452c95a84f05c506629873"  
     ): WeatherResponse{
         return withContext(Dispatchers.IO) {
             weatherServices.getCurrentWeather(lat, lon, units, lang, appid)
         }
     }
-
-    suspend fun makeNetworkCallCity(
-        city : String ,
-        appid : String? = "c687f9659a452c95a84f05c506629873"
-    ): WeatherResponse{
-        return withContext(Dispatchers.IO) {
-            weatherServices.getWeatherByCity(city)
-        }
-    }
-
-
-
 
 
 }

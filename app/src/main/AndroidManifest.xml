@@ -7,6 +7,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+
 
     <application
         android:allowBackup="true"
@@ -18,6 +22,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WeatherFinalApp"
         tools:targetApi="31">
+        <activity
+            android:name=".Alert.view.DialogAlertActivity"
+            android:exported="false" />
         <activity
             android:name=".LocationDetailsScreen.view.LocationDetailsActivity"
             android:exported="false" />
@@ -31,7 +38,7 @@
 
         <activity
             android:name=".MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".BottomNavigation.BottomNavigationActivity"
             android:exported="true">
@@ -44,6 +51,12 @@
         <activity
             android:name=".splashScreen.SplashScreenActivity"
             android:exported="false" />
+
+        <receiver android:name=".Alert.view.AlertReceiver"
+            android:enabled="true"/>
+        <receiver android:name=".Alert.view.AlarmReceiver"
+            android:enabled="true"/>
+
     </application>
 
 </manifest>

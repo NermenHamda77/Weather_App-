@@ -1,6 +1,7 @@
 package com.example.weatherfinalapp.db
 
 import android.content.Context
+import com.example.weatherfinalapp.model.Alert
 import com.example.weatherfinalapp.model.FavoriteLocation
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -40,6 +41,25 @@ class WeatherLocalDataSourceImp private constructor(context: Context) {
             weatherDAO.deleteLocation(location)
         }
     }
+
+
+    /// Alert
+    fun getAllStoredAlerts(): Flow<List<Alert>>{
+        return weatherDAO.getAllAlerts()
+    }
+
+    suspend fun addAlert(alert: Alert) {
+        CoroutineScope(Dispatchers.IO).launch {
+            weatherDAO.insertAlert(alert)
+        }
+    }
+
+    suspend fun removeAlert(alert: Alert) {
+        CoroutineScope(Dispatchers.IO).launch {
+            weatherDAO.deleteAlert(alert)
+        }
+    }
+
 
 }
 

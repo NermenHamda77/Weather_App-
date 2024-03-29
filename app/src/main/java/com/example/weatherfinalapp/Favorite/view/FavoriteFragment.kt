@@ -78,7 +78,9 @@ class FavoriteFragment : Fragment(), OnFavClickListener {
         }
 
         fabBtn.setOnClickListener {
-            startActivity(Intent(requireContext(), MapActivity::class.java))
+            val intent = Intent(requireContext(), MapActivity::class.java)
+            intent.putExtra("PLACE" , "FAVORITE")
+            startActivity(intent)
         }
 
         return view

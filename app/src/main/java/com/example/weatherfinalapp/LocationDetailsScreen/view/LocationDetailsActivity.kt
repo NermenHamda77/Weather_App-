@@ -148,9 +148,9 @@ class LocationDetailsActivity : AppCompatActivity() {
 
                         temp.text = "${weather.list.firstOrNull()?.main?.temp.toString()}°C"
                         description.text = weather.list.firstOrNull()?.weather?.firstOrNull()?.description.toString()
-                        humidity.text = "${weather.list.firstOrNull()?.main?.temp.toString()}%"
+                        humidity.text = "${weather.list.firstOrNull()?.main?.humidity.toString()}%"
                         cloud.text = "${weather.list.firstOrNull()?.clouds?.all.toString()}%"
-                        pressure.text = "${weather.list.firstOrNull()?.main?.temp.toString()}hpa"
+                        pressure.text = "${weather.list.firstOrNull()?.main?.pressure.toString()}hpa"
                         wind.text = "${weather.list.firstOrNull()?.wind?.speed.toString()}m/s"
 
 

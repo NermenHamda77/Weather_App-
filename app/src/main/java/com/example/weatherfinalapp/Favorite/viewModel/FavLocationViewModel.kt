@@ -16,7 +16,6 @@ class FavLocationViewModel(private val _repository: WeatherRepository) : ViewMod
     private var _location: MutableLiveData<List<FavoriteLocation>> =
         MutableLiveData<List<FavoriteLocation>>()
     val location: LiveData<List<FavoriteLocation>> get() = _location
-    val _weather: MutableStateFlow<ApiWeather> = MutableStateFlow(ApiWeather.Loading)
 
     init {
         getLocalLocations()
@@ -38,10 +37,11 @@ class FavLocationViewModel(private val _repository: WeatherRepository) : ViewMod
         }
 
     }
+}
 
 
 
-    suspend fun getAllWeathers(lat: Double, lon: Double, lang: String, units: String) {
+/*  suspend fun getAllWeathers(lat: Double, lon: Double, lang: String, units: String) {
         viewModelScope.launch {
             _repository.getWeather(lat, lon, units, lang)
                 .catch { e ->
@@ -51,8 +51,12 @@ class FavLocationViewModel(private val _repository: WeatherRepository) : ViewMod
                     _weather.value = ApiWeather.Success(weatherResponse)
                 }
         }
-    }
-}
+    }*/
+
+
+
+
+
 /*
 class FavProductViewModel(private val repo: ProductsRepository) : ViewModel() {
     private val _products: MutableLiveData<List<Product>> = MutableLiveData()

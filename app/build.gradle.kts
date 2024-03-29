@@ -87,6 +87,43 @@ dependencies {
 
     implementation("com.google.android.gms:play-services-location:21.2.0")
 
+    //unit testing
+
+    //SafeArgs
+    implementation ("androidx.navigation:navigation-fragment-ktx:2.7.7")
+    implementation ("androidx.navigation:navigation-ui-ktx:2.7.7")
+
+    implementation("com.jakewharton.timber:timber:5.0.1")
+
+    testImplementation("org.hamcrest:hamcrest:2.2")
+    testImplementation("org.hamcrest:hamcrest-library:2.2")
+    androidTestImplementation("org.hamcrest:hamcrest:2.2")
+    androidTestImplementation("org.hamcrest:hamcrest-library:2.2")
+
+    testImplementation("androidx.test.ext:junit-ktx:1.1.5")
+    testImplementation("androidx.test:core-ktx:1.4.0")
+    testImplementation("org.robolectric:robolectric:4.8")
+
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
+    androidTestImplementation("androidx.arch.core:core-testing:2.2.0")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
+
+    testImplementation ("junit:junit:4.13.2")
+    testImplementation ("org.mockito:mockito-core:3.11.2")
+
+    // Robolectric for android testing
+    testImplementation ("org.robolectric:robolectric:4.8")
+
+    // Truth for assertions
+    testImplementation ("com.google.truth:truth:1.1.3")
+
+    // Arch Test for Android Architecture Components
+    testImplementation ("androidx.arch.core:core-testing:2.2.0")
+
+    implementation ("com.google.android.material:material:1.11.0")
+    implementation ("androidx.work:work-runtime:2.9.0")
 
 }
 

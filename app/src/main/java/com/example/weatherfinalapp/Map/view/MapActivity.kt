@@ -1,6 +1,7 @@
 package com.example.weatherfinalapp.Map.view
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.graphics.Rect
 import android.location.Geocoder
 import android.location.GpsStatus
@@ -12,6 +13,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.weatherapp.Home.viewModel.HomeViewModel
+import com.example.weatherfinalapp.Alert.view.AlertFragment
+import com.example.weatherfinalapp.Alert.view.DialogAlertActivity
+import com.example.weatherfinalapp.Favorite.view.FavoriteFragment
 import com.example.weatherfinalapp.Favorite.viewModel.FavLocationViewModel
 import com.example.weatherfinalapp.Favorite.viewModel.FavLocationViewModelFactory
 import com.example.weatherfinalapp.Home.viewModel.HomeViewModelFactory
@@ -46,6 +50,8 @@ class MapActivity : AppCompatActivity(), MapListener, GpsStatus.Listener {
     var latit :  Double = 0.0
     var longit : Double = 0.0
 
+
+    private lateinit var placeValue : String
 
     lateinit var mMap: MapView
     lateinit var controller: IMapController
@@ -114,6 +120,9 @@ class MapActivity : AppCompatActivity(), MapListener, GpsStatus.Listener {
 
         viewModel = ViewModelProvider(this, factory).get(MapViewModel::class.java)
 
+
+        placeValue = intent.getStringExtra("PLACE").toString()   // FAVORITE OR ALERT
+
     }
 
     override fun onScroll(event: ScrollEvent?): Boolean {
@@ -153,32 +162,76 @@ class MapActivity : AppCompatActivity(), MapListener, GpsStatus.Listener {
             val address = getAddress(latit, longit)
 
             val favoriteLocation = FavoriteLocation(latit, longit, address)
+
+            when (placeValue) {
+                "ALERT" -> {
+                    val builder: AlertDialog.Builder = AlertDialog.Builder(this@MapActivity)
+                    builder.setTitle("Do You Want To Add ${address} To Your Alert?")
+                        .setPositiveButton("Add") { dialog, which ->
+                            if (address != null){
+                              //  viewModel.addLocationToFav(favoriteLocation)
+                                val intent = Intent(this@MapActivity, DialogAlertActivity::class.java)
+                                intent.putExtra("address" , address)
+                                intent.putExtra("lat" , latit)
+                                intent.putExtra("lon" , longit)
+                                startActivity(intent)
+                                finish()
+                                Toast.makeText(
+                                    this@MapActivity,
+                                    "$address is added to Alert",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+
+
+                            }else
+                            {
+                                Toast.makeText(this@MapActivity , "Fail in adding this Location to Alert" , Toast.LENGTH_SHORT).show()
+
+                            }
+                            dialog.dismiss()
+
+                        }
+                        .setNegativeButton("Cancel") { dialog, which ->
+                            dialog.dismiss()
+                        }
+                        .setCancelable(false)
+                        .show()
+
+                }
+                "FAVORITE" -> {
+                    val builder: AlertDialog.Builder = AlertDialog.Builder(this@MapActivity)
+                    builder.setTitle("Do You Want To Add ${address} To Your Favorite Locations?")
+                        .setPositiveButton("Add") { dialog, which ->
+                            if (address != null){
+                                viewModel.addLocationToFav(favoriteLocation)
+                                Toast.makeText(
+                                    this@MapActivity,
+                                    "$address is added to Favorite",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                               // finish()
+                            }else
+                            {
+                                Toast.makeText(this@MapActivity , "Fail in adding this Location to Fav" , Toast.LENGTH_SHORT).show()
+
+                            }
+                            dialog.dismiss()
+
+                        }
+                        .setNegativeButton("Cancel") { dialog, which ->
+                            dialog.dismiss()
+                        }
+                        .setCancelable(false)
+                        .show()
+
+                }
+                else -> {
+                    // Handle other cases if necessary
+                }
+            }
             // Now you can use favoriteLocation as needed
 
 
-            val builder: AlertDialog.Builder = AlertDialog.Builder(this@MapActivity)
-            builder.setTitle("Do You Want To Add ${address} To Your Favorite Locations?")
-                .setPositiveButton("Add") { dialog, which ->
-                    if (address != null){
-                        viewModel.addLocationToFav(favoriteLocation)
-                        Toast.makeText(
-                            this@MapActivity,
-                            "$address is added to Favorite",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }else
-                    {
-                        Toast.makeText(this@MapActivity , "Fail in adding this Location" , Toast.LENGTH_SHORT).show()
-
-                    }
-                    dialog.dismiss()
-
-                }
-                .setNegativeButton("Cancel") { dialog, which ->
-                    dialog.dismiss()
-                }
-                .setCancelable(false)
-                .show()
 
 
 

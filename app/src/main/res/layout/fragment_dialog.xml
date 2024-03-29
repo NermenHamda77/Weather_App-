@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+app:cardBackgroundColor="@color/primary"
+app:cardCornerRadius="0dp"
+app:cardElevation="8dp">
+<!-- android:background="@drawable/alert_dialog_header"-->
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+    <!--     android:background="@drawable/alert_dialog_header"-->
+
+
+
+
+
+
+    <TextView
+        android:id="@+id/tv_add_alert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/lobster"
+        android:text="@string/add_alert_title"
+        android:textColor="@color/white"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/tv_select_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/lobster"
+        android:text="@string/select_location_title"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_add_alert" />
+
+    <ImageView
+        android:id="@+id/iv_map_btn"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/locationtitle"
+        app:layout_constraintStart_toStartOf="@+id/tv_select_location"
+        app:layout_constraintTop_toBottomOf="@+id/tv_select_location"
+        app:srcCompat="@drawable/map_icon" />
+
+    <TextView
+        android:id="@+id/tv_alert_location_value"
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:textColor="@color/purple_200"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_map_btn"
+        app:layout_constraintStart_toEndOf="@+id/iv_map_btn"
+        app:layout_constraintTop_toTopOf="@+id/iv_map_btn" />
+
+
+    <TextView
+        android:id="@+id/tv_select_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/lobster"
+        android:text="@string/select_date_title"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_map_btn" />
+
+    <ImageView
+        android:id="@+id/calender_btn"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@+id/tv_select_date"
+        app:layout_constraintTop_toBottomOf="@+id/tv_select_date"
+        app:srcCompat="@drawable/calendar_icon" />
+
+    <TextView
+        android:id="@+id/tv_alert_date_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:textColor="@color/purple_200"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/calender_btn"
+        app:layout_constraintStart_toEndOf="@+id/calender_btn"
+        app:layout_constraintTop_toTopOf="@+id/calender_btn" />
+
+    <TextView
+        android:id="@+id/tv_from"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/lobster"
+        android:text="@string/from"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calender_btn" />
+
+    <ImageView
+        android:id="@+id/iv_from_time_btn"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_from"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tv_from"
+        app:layout_constraintTop_toBottomOf="@+id/tv_from"
+        app:srcCompat="@drawable/alarm_icon_3" />
+
+    <TextView
+        android:id="@+id/tv_from_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:textColor="@color/purple_200"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_from_time_btn"
+        app:layout_constraintStart_toEndOf="@+id/iv_from_time_btn"
+        app:layout_constraintTop_toTopOf="@+id/iv_from_time_btn" />
+
+    <TextView
+        android:id="@+id/tv_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="112dp"
+        android:layout_marginBottom="1dp"
+        android:fontFamily="@font/lobster"
+        android:text="@string/to"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_from"
+        app:layout_constraintStart_toEndOf="@+id/tv_from"
+        app:layout_constraintTop_toTopOf="@+id/tv_from"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/iv_to_time_btn"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_to"
+        app:layout_constraintHorizontal_bias="0.066"
+        app:layout_constraintStart_toStartOf="@+id/tv_to"
+        app:layout_constraintTop_toBottomOf="@+id/tv_to"
+        app:srcCompat="@drawable/alarm_icon_3" />
+
+    <TextView
+        android:id="@+id/alert_to_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:textColor="@color/purple_200"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_to_time_btn"
+        app:layout_constraintStart_toEndOf="@+id/iv_to_time_btn"
+        app:layout_constraintTop_toTopOf="@+id/iv_to_time_btn"
+        app:layout_constraintVertical_bias="0.636" />
+
+    <Button
+        android:id="@+id/save_alert_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_weight="1"
+        android:backgroundTint="@color/purple_200"
+        android:fontFamily="@font/lobster"
+        android:text="@string/save"
+        android:textSize="20sp"
+        android:textColor="@color/primary"
+        app:layout_constraintEnd_toEndOf="@+id/alert_radio_group"
+        app:layout_constraintStart_toStartOf="@+id/alert_radio_group"
+        app:layout_constraintTop_toBottomOf="@+id/alert_radio_group" />
+
+    <RadioGroup
+        android:id="@+id/alert_radio_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.366"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_from_time_btn">
+
+        <RadioButton
+            android:id="@+id/radio_notification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lobster"
+            android:text="@string/notification"
+            android:textColor="@color/white"
+            android:textColorHighlight="@color/purple_200"
+            android:textColorLink="@color/purple_200"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:id="@+id/radio_alarm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lobster"
+            android:paddingStart="6dp"
+            android:paddingEnd="6dp"
+            android:text="@string/alarm_title"
+            android:textColor="@color/white"
+            android:textColorHighlight="@color/purple_200"
+            android:textColorLink="@color/purple_200"
+            android:textSize="20sp" />
+
+    </RadioGroup>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

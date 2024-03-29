@@ -10,7 +10,7 @@
     <item
         android:id="@+id/alert_id"
         android:title="@string/alert"
-        android:icon="@drawable/baseline_settings_24"/>
+        android:icon="@drawable/alert_icon"/>
 
     <item
         android:id="@+id/fav_id"

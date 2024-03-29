@@ -38,6 +38,20 @@ class WeatherRepositoryImp private constructor(
     }
 
 
+    ////Alert
+    override fun getAllAlerts(): Flow<List<Alert>> {
+       return localDataSource.getAllStoredAlerts()
+    }
+
+    override suspend fun insertAlert(alert: Alert) {
+        localDataSource.addAlert(alert)
+    }
+
+    override suspend fun deleteAlert(alert: Alert) {
+       localDataSource.removeAlert(alert)
+    }
+
+
     override suspend fun getWeather(
         lat: Double,
         lon: Double,
@@ -50,9 +64,6 @@ class WeatherRepositoryImp private constructor(
 
     }
 
-    override suspend fun getWeatherOfCity(city: String, appid: String?): Flow<WeatherResponse> {
-        return flowOf(remoteSource.makeNetworkCallCity(city , appid))
-    }
 
 
 }
