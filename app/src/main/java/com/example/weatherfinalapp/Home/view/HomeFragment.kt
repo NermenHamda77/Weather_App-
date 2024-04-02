@@ -1,11 +1,8 @@
 package com.example.weatherfinalapp.Home.view
 
 import android.Manifest
-import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Geocoder
-import android.net.ConnectivityManager
-import android.net.NetworkInfo
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
@@ -25,7 +22,6 @@ import com.bumptech.glide.Glide
 import com.example.weatherapp.Home.viewModel.HomeViewModel
 import com.example.weatherfinalapp.Home.viewModel.HomeViewModelFactory
 import com.example.weatherfinalapp.Network.WeatherRemoteDataSourceImp
-import com.example.weatherfinalapp.Network.WeatherServices
 import com.example.weatherfinalapp.R
 import com.example.weatherfinalapp.Settings.view.SharedPreferencesManager
 import com.example.weatherfinalapp.db.WeatherLocalDataSourceImp
@@ -35,7 +31,6 @@ import com.example.weatherfinalapp.model.WeatherResponse
 import com.google.android.gms.location.*
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import java.util.Locale
 
 private const val TAG = "HomeFragment"
 
@@ -61,7 +56,6 @@ class HomeFragment : Fragment() {
     private lateinit var hourLinearLayoutManager: LinearLayoutManager
     private lateinit var weekLinearLayoutManager: LinearLayoutManager
 
-    lateinit var geocoder: Geocoder
     private val locationRequestID = 1
     private var latit :  Double = 0.0
     private var longit : Double = 0.0
@@ -104,9 +98,9 @@ class HomeFragment : Fragment() {
 
         homeViewModelFactory = HomeViewModelFactory(
             WeatherRepositoryImp.getInstance(
-            WeatherRemoteDataSourceImp.getInstance(),
-            WeatherLocalDataSourceImp.getInstance(requireContext())
-        ),
+                WeatherRemoteDataSourceImp.getInstance(),
+                WeatherLocalDataSourceImp.getInstance(requireContext())
+            ),
             sharedPreferencesManager)
 
         viewModel = ViewModelProvider(this, homeViewModelFactory).get(HomeViewModel::class.java)
@@ -173,13 +167,6 @@ class HomeFragment : Fragment() {
         val temperatureFormatted = String.format("%.2f" , temperatureCelsuis)
         temp.text = "$temperatureFormatted°c"
 
-
-
-
-
-
-
-
         description.text = weather.list.firstOrNull()?.weather?.firstOrNull()?.description.toString()
         humidity.text = "${weather.list.firstOrNull()?.main?.humidity.toString()}%"
         cloud.text = "${weather.list.firstOrNull()?.clouds?.all.toString()}%"
@@ -187,7 +174,28 @@ class HomeFragment : Fragment() {
         wind.text = "${weather.list.firstOrNull()?.wind?.speed.toString()}m/s"
         hourHomeAdapter.setList(weather.list)
         weekHomeAdapter.setList(weather.list)
+        updateWindUI(weather.list.firstOrNull()?.wind?.speed ?: 0.0)
     }
+
+
+
+    private fun updateWindUI(speed: Double) {
+        val windValueTextView = view?.findViewById<TextView>(R.id.tv_wind_value)
+        val windUnit = sharedPreferencesManager.getSelectedWindUnit()
+
+        val convertedSpeed = convertWindSpeed(speed, windUnit)
+
+        windValueTextView?.text = "$convertedSpeed $windUnit"
+    }
+
+    private fun convertWindSpeed(speed: Double, windUnit: String): Double {
+        return when (windUnit) {
+            SharedPreferencesManager.DEFAULT_WIND_UNIT -> speed
+            "Mile/Hr" -> speed * 2.23694
+            else -> speed
+        }
+    }
+
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
@@ -213,13 +221,6 @@ class HomeFragment : Fragment() {
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             return
         }
         fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper())

@@ -1,14 +1,10 @@
 package com.example.weatherfinalapp.Alert.view
+
 import android.app.*
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.RadioButton
-import android.widget.RadioGroup
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -26,12 +22,10 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 class DialogAlertActivity : AppCompatActivity() {
 
     companion object {
         private var uniqueIdCounter = 0
-        const val CHANNEL_ID = "channelId"
     }
 
     private lateinit var mapImage: ImageView
@@ -42,22 +36,21 @@ class DialogAlertActivity : AppCompatActivity() {
     private lateinit var timeImage: ImageView
     private lateinit var calendareImage: ImageView
 
-    private lateinit var saveBtn : Button
-    private lateinit var notification : RadioButton
-    private lateinit var alarm : RadioButton
-    private lateinit var group : RadioGroup
+    private lateinit var saveBtn: Button
+    private lateinit var notification: RadioButton
+    private lateinit var alarm: RadioButton
+    private lateinit var group: RadioGroup
 
     private lateinit var dialogViewModel: AlertViewModel
     private lateinit var factory: AlertViewModelFactory
 
-    private var cityName : String = "city"
-    private var cityDescription : String = "desc"
-    private var cityTemp : String = "temp"
-    private var cityWind : String = "wind"
-    private var cityHumidity : String = "humidity"
-    private var cityPressure : String = "pressure"
-    private var cityCloud : String = "cloud"
-
+    private var cityName: String = "city"
+    private var cityDescription: String = "desc"
+    private var cityTemp: String = "temp"
+    private var cityWind: String = "wind"
+    private var cityHumidity: String = "humidity"
+    private var cityPressure: String = "pressure"
+    private var cityCloud: String = "cloud"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,8 +66,10 @@ class DialogAlertActivity : AppCompatActivity() {
         saveBtn = findViewById(R.id.save_alert_btn)
 
         notification = findViewById(R.id.radio_notification)
-        alarm =  findViewById(R.id.radio_alarm)
+        alarm = findViewById(R.id.radio_alarm)
         group = findViewById(R.id.alert_radio_group)
+
+        createNotificationChannel()
 
         factory = AlertViewModelFactory(
             WeatherRepositoryImp.getInstance(
@@ -94,18 +89,15 @@ class DialogAlertActivity : AppCompatActivity() {
 
         mapImage.setOnClickListener {
             val intent = Intent(this, MapActivity::class.java)
-            intent.putExtra("PLACE" , "ALERT")
+            intent.putExtra("PLACE", "ALERT")
             startActivity(intent)
         }
 
-        group.setOnCheckedChangeListener { _ ,chosen ->
-            val type = findViewById<RadioButton>(chosen)
-            when(type){
+        group.setOnCheckedChangeListener { _, chosen ->
+            when (findViewById<RadioButton>(chosen)) {
                 notification -> {
-                    // Notification radio button clicked
                 }
                 alarm -> {
-                    // Alarm radio button clicked
                 }
             }
         }
@@ -115,7 +107,7 @@ class DialogAlertActivity : AppCompatActivity() {
         val lon = intent.getDoubleExtra("lon", 0.0)
         locationTitle.text = address.toString()
 
-        saveBtn.setOnClickListener{
+        saveBtn.setOnClickListener {
             val chosenDate = dateValue.text.toString()
             val chosenTime = timeValue.text.toString()
 
@@ -128,14 +120,14 @@ class DialogAlertActivity : AppCompatActivity() {
                 longitude = lon
             )
             dialogViewModel.addAlertToList(alert)
-            Toast.makeText(this,"done", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "done", Toast.LENGTH_SHORT).show()
             lifecycleScope.launch {
-                dialogViewModel.getAllWeathersOfLoc(lat , lon , "en" , "fer" )
+                dialogViewModel.getAllWeathersOfLoc(lat, lon, "en", "fer")
             }
 
             lifecycleScope.launch {
                 dialogViewModel._weather.collectLatest { result ->
-                    when(result){
+                    when (result) {
                         is ApiWeather.Loading -> {
                             // Handle loading state
                         }
@@ -149,21 +141,15 @@ class DialogAlertActivity : AppCompatActivity() {
                             cityPressure = "${weather.list.firstOrNull()?.main?.pressure.toString()}hpa"
                             cityWind = "${weather.list.firstOrNull()?.wind?.speed.toString()}m/s"
 
-                            // Schedule notification
                             val uniqueId = generateUniqueId()
                             scheduleNotification(alert, uniqueId, chosenDate, chosenTime)
                         }
                         else -> {
-                            // Handle other cases if necessary
                         }
                     }
                 }
             }
-            finish()
         }
-
-        // Call createNotificationChannel method
-        createNotificationChannel()
     }
 
     private fun createNotificationChannel() {
@@ -206,49 +192,46 @@ class DialogAlertActivity : AppCompatActivity() {
         )
 
         val alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
+        val notificationTime = calculateNotificationTime(chosenDate, chosenTime)
 
-        // Calculate notification time
-        val notificationTimeMillis = calculateNotificationTime(chosenDate, chosenTime)
+        try {
+            alarmManager.setExact(
+                AlarmManager.RTC_WAKEUP,
+                notificationTime,
+                pendingIntent
+            )
+        } catch (e: SecurityException) {
 
-        // Calculate delay
-        val delay = notificationTimeMillis - System.currentTimeMillis()
-
-        if (delay > 0) {
-            try {
-                alarmManager.setExact(
-                    AlarmManager.RTC_WAKEUP,
-                    notificationTimeMillis,
-                    pendingIntent
-                )
-            } catch (e: SecurityException) {
-                // Handle SecurityException
-            }
-        } else {
-            // The specified time has already passed
-            // Handle it accordingly
+            alarmManager.set(
+                AlarmManager.RTC_WAKEUP,
+                notificationTime,
+                pendingIntent
+            )
         }
+    }
+
+    private fun calculateNotificationTime(chosenDate: String, chosenTime: String): Long {
+        val pattern = "yyyy-MM-dd HH:mm"
+        val dateTimeString = "$chosenDate $chosenTime"
+        val formatter = SimpleDateFormat(pattern, Locale.getDefault())
+        val date = formatter.parse(dateTimeString) ?: Date()
+        return date.time
     }
 
     private fun showTimePicker() {
         val cal = Calendar.getInstance()
         val hour = cal.get(Calendar.HOUR_OF_DAY)
         val minute = cal.get(Calendar.MINUTE)
-        val is24HourFormat = false // Set to false for 12-hour format
 
         val timePickerDialog = TimePickerDialog(
             this,
-            TimePickerDialog.OnTimeSetListener { _, selectedHour, selectedMinute ->
-                val hourOfDay = if (selectedHour > 12) selectedHour - 12 else selectedHour
-                val amPm = if (selectedHour >= 12) "PM" else "AM"
-
-                timeValue.text = String.format("%02d:%02d %s", hourOfDay, selectedMinute, amPm)
-
+            { _, selectedHour, selectedMinute ->
+                timeValue.text = String.format("%02d:%02d", selectedHour, selectedMinute)
             },
             hour,
             minute,
-            is24HourFormat
+            true
         )
-
         timePickerDialog.show()
     }
 
@@ -268,12 +251,5 @@ class DialogAlertActivity : AppCompatActivity() {
             dayOfMonth
         )
         datePickerDialog.show()
-    }
-
-    private fun calculateNotificationTime(date: String, time: String): Long {
-        val dateTimeString = "$date $time"
-        val formatter = SimpleDateFormat("yyyy-MM-dd hh:mm a", Locale.getDefault())
-        val dateTime = formatter.parse(dateTimeString)
-        return dateTime?.time ?: 0
     }
 }

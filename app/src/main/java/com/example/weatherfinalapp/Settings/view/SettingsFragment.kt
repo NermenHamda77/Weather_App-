@@ -13,15 +13,6 @@ import com.example.weatherfinalapp.R
 
 
 class SettingsFragment : Fragment() {
-   /* private lateinit var gpsBtn : RadioButton
-    private lateinit var mapBtn : RadioButton
-    private lateinit var englishBtn : RadioButton
-    private lateinit var arabicBtn : RadioButton
-    private lateinit var celsiusBtn : RadioButton
-    private lateinit var kelvinBtn : RadioButton
-    private lateinit var fahrenheitBtn : RadioButton
-    private lateinit var meterBtn : RadioButton
-    private lateinit var mileBtn : RadioButton*/
 
 
     private lateinit var sharedPreferences: SharedPreferences
@@ -42,23 +33,10 @@ class SettingsFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
 
-       /* gpsBtn = view.findViewById(R.id.rbtn_gps_option)
-        mapBtn = view.findViewById(R.id.rbtn_map_option)
-        englishBtn = view.findViewById(R.id.rbtn_english_option)
-        arabicBtn = view.findViewById(R.id.rbtn_arabic_option)
-        celsiusBtn = view.findViewById(R.id.rbtn_celsius_option)
-        kelvinBtn = view.findViewById(R.id.rbtn_kelvin_option)
-        fahrenheitBtn = view.findViewById(R.id.rbtn_fahrenheit_option)
-        meterBtn = view.findViewById(R.id.rbtn_meter_sec_option)
-        mileBtn = view.findViewById(R.id.rbtn_mile_hr_option)
-*/
-
-
         val currentUnit = sharedPreferences.getString("unit", "metric")
 
         val currentLanguage = sharedPreferences.getString("lang", "en")
 
-       // val currentWind = sharedPreferences.getString("" , "")       ////???
 
         val radioGroup = view.findViewById<RadioGroup>(R.id.radioGroupUnit)
         when (currentUnit) {
@@ -107,33 +85,33 @@ class SettingsFragment : Fragment() {
         }
 
 
-/*
+        ///  wind
+        val currentWind = sharedPreferences.getString("wind", "meter_per_sec")
 
-        //// Wind     ??????????????????????????????????????????
         val radioGroupWind = view.findViewById<RadioGroup>(R.id.met_sec)
         when (currentWind) {
-            "" -> radioGroupWind.check(R.id.rbtn_meter_sec_option)
-            ""->radioGroupWind.check(R.id.rbtn_mile_hr_option)
-
+            "meter_per_sec" -> radioGroupWind.check(R.id.rbtn_meter_sec_option)
+            "mile_per_hr" -> radioGroupWind.check(R.id.rbtn_mile_hr_option)
         }
 
         radioGroupWind.setOnCheckedChangeListener { _, checkedId ->
             val radioButton = view.findViewById<RadioButton>(checkedId)
             val selectedWind = when (radioButton.id) {
-                R.id.rbtn_meter_sec_option -> ""
-                R.id.rbtn_mile_hr_option -> ""
-                else -> ""
+                R.id.rbtn_meter_sec_option -> "meter_per_sec"
+                R.id.rbtn_mile_hr_option -> "mile_per_hr"
+                else -> "meter_per_sec"
             }
             with(sharedPreferences.edit()) {
-                putString("", selectedWind)
+                putString("wind", selectedWind)
                 apply()
             }
-            sharedPreferencesManager.saveSelectedWind(selectedWind)
-            LanguageUtils.updateLanguage(requireContext(), selectedWind)
+            sharedPreferencesManager.saveSelectedWindUnit(selectedWind)
         }
 
 
-*/
+
+      // Location
+
 
 
         return view

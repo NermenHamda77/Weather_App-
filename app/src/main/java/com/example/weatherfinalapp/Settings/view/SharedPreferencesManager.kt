@@ -6,14 +6,19 @@ class SharedPreferencesManager(context: Context) {
 
     private val sharedPreferences = context.getSharedPreferences("WeatherPrefs", Context.MODE_PRIVATE)
 
-
-    fun saveSelectedWind(unit: String) {
-        sharedPreferences.edit().putString("selected_wind", unit).apply()
+    companion object {
+        const val DEFAULT_WIND_UNIT = "Meter/Sec"
+        const val KEY_SELECTED_WIND_UNIT = "selected_wind_unit"
     }
 
-    fun getSelectedWind(): String {
-        return sharedPreferences.getString("selected_wind", "metric") ?: "metric"   ////?????????
+    fun saveSelectedWindUnit(unit: String) {
+        sharedPreferences.edit().putString(KEY_SELECTED_WIND_UNIT, unit).apply()
     }
+
+    fun getSelectedWindUnit(): String {
+        return sharedPreferences.getString(KEY_SELECTED_WIND_UNIT, DEFAULT_WIND_UNIT) ?: DEFAULT_WIND_UNIT
+    }
+
     fun saveSelectedUnit(unit: String) {
         sharedPreferences.edit().putString("selected_unit", unit).apply()
     }
@@ -28,5 +33,13 @@ class SharedPreferencesManager(context: Context) {
 
     fun getSelectedLanguage(): String {
         return sharedPreferences.getString("selected_language", "en") ?: "en"
+    }
+
+    fun saveSelectedLocation(location: String) {
+        sharedPreferences.edit().putString("selected_location", location).apply()
+    }
+
+    fun getSelectedLocation(): String {
+        return sharedPreferences.getString("selected_location", "GPS") ?: "GPS"
     }
 }
