@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.example.weatherfinalapp.model.Alert
 import com.example.weatherfinalapp.model.FavoriteLocation
 
-@Database(entities = arrayOf(FavoriteLocation::class, Alert::class), version = 2)
+@Database(entities = arrayOf(FavoriteLocation::class, Alert::class), version = 3)
 abstract class AppDataBase : RoomDatabase() {
     abstract fun getWeatherDAO (): WeatherDAO
     companion object {

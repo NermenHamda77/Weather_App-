@@ -12,13 +12,8 @@ import android.widget.Toast
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.example.weatherapp.Home.viewModel.HomeViewModel
-import com.example.weatherfinalapp.Alert.view.AlertFragment
 import com.example.weatherfinalapp.Alert.view.DialogAlertActivity
-import com.example.weatherfinalapp.Favorite.view.FavoriteFragment
-import com.example.weatherfinalapp.Favorite.viewModel.FavLocationViewModel
-import com.example.weatherfinalapp.Favorite.viewModel.FavLocationViewModelFactory
-import com.example.weatherfinalapp.Home.viewModel.HomeViewModelFactory
+
 import com.example.weatherfinalapp.Map.viewModel.MapViewModel
 import com.example.weatherfinalapp.Map.viewModel.MapViewModelFactory
 import com.example.weatherfinalapp.Network.WeatherRemoteDataSourceImp

@@ -26,12 +26,12 @@ override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
         val alertItem = getItem(position)
         val address = alertItem.address?.split(",")
-        val locationName = address?.getOrNull(1) ?: ""  // Use index 1 to get the second part
+        val locationName = address?.getOrNull(0) ?: ""  // Use index 1 to get the second part
         holder.location.text = locationName
 
 
-        holder.fromText.text = alertItem.fromTime
-        holder.toText.text = alertItem.toTime
+        holder.dateText.text = alertItem.date
+        holder.timeText.text = alertItem.time
 
 
 
@@ -53,8 +53,8 @@ override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val deleteBtn: ImageView = itemView.findViewById(R.id.btn_delete_alert)
-        val fromText: TextView = itemView.findViewById(R.id.tv_from_value_item_list)
-        val toText: TextView = itemView.findViewById(R.id.tv_to_value_item_list)
+        val dateText: TextView = itemView.findViewById(R.id.tv_date_value_item_list)
+        val timeText: TextView = itemView.findViewById(R.id.tv_time_value_item_list)
         val location: TextView = itemView.findViewById(R.id.tv_location_title)
 
     }

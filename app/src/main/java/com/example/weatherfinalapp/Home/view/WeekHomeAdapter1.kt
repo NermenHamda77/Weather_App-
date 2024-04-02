@@ -55,8 +55,7 @@ class WeekHomeAdapter1(private val context: Context) : RecyclerView.Adapter<Week
         }
 
 
-      //  holder.humidity.text = foreCastObject.main!!.humidity.toString() //
-        //holder.windSpeed.text = foreCastObject.wind!!.speed.toString() //
+
 
         if (foreCastObject.weather.isNotEmpty()) {
             val weather = foreCastObject.weather[0] // Assuming you're only interested in the first weather condition

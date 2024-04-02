@@ -41,20 +41,20 @@
             android:exported="true" />
         <activity
             android:name=".BottomNavigation.BottomNavigationActivity"
-            android:exported="true">
+            android:exported="false"/>
+
+
+        <activity
+            android:name=".splashScreen.SplashScreenActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".splashScreen.SplashScreenActivity"
-            android:exported="false" />
 
-        <receiver android:name=".Alert.view.AlertReceiver"
-            android:enabled="true"/>
-        <receiver android:name=".Alert.view.AlarmReceiver"
+        <receiver android:name=".Alert.view.NotificationReceiver"
             android:enabled="true"/>
 
     </application>

@@ -1,7 +1,9 @@
 package com.example.weatherfinalapp.LocationDetailsScreen.viewModel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.weatherfinalapp.Settings.view.SharedPreferencesManager
 import com.example.weatherfinalapp.model.ApiWeather
 import com.example.weatherfinalapp.model.WeatherRepository
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -11,11 +13,15 @@ import kotlinx.coroutines.launch
 //////?????????????
 // i think i need function that take location and get the weather of it
 
-class LocationDetailsViewModel(private val repo: WeatherRepository) : ViewModel()  {
+class LocationDetailsViewModel(private val repo: WeatherRepository, private val sharedPreferencesManager: SharedPreferencesManager) : ViewModel()  {
     val _weather: MutableStateFlow<ApiWeather> = MutableStateFlow(ApiWeather.Loading)
-    suspend fun getAllWeathersOfLoc(lat: Double, lon: Double, lang: String, units: String) {
+    suspend fun getAllWeathersOfLoc(lat: Double, lon: Double) {
+        val selectedUnit = getSelectedUnit()
+        val selectedLanguage = getSelectedLanguage()
+        Log.i("languge", "getCurrentWeather: "+selectedLanguage)
+
         viewModelScope.launch {
-            repo.getWeather(lat, lon, units, lang)
+            repo.getWeather(lat, lon, selectedUnit, selectedLanguage)
                 .catch { e ->
                     _weather.value = ApiWeather.Failure(e)
                 }
@@ -25,6 +31,13 @@ class LocationDetailsViewModel(private val repo: WeatherRepository) : ViewModel(
         }
 
 
+    }
+
+    private fun getSelectedUnit(): String {
+        return sharedPreferencesManager.getSelectedUnit()
+    }
+    private fun getSelectedLanguage(): String {
+        return sharedPreferencesManager.getSelectedLanguage()
     }
 }
 

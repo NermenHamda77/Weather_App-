@@ -27,6 +27,7 @@ import com.example.weatherfinalapp.Home.viewModel.HomeViewModelFactory
 import com.example.weatherfinalapp.Network.WeatherRemoteDataSourceImp
 import com.example.weatherfinalapp.Network.WeatherServices
 import com.example.weatherfinalapp.R
+import com.example.weatherfinalapp.Settings.view.SharedPreferencesManager
 import com.example.weatherfinalapp.db.WeatherLocalDataSourceImp
 import com.example.weatherfinalapp.model.ApiWeather
 import com.example.weatherfinalapp.model.WeatherRepositoryImp
@@ -65,6 +66,7 @@ class HomeFragment : Fragment() {
     private var latit :  Double = 0.0
     private var longit : Double = 0.0
 
+    private lateinit var sharedPreferencesManager: SharedPreferencesManager
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var locationCallback: LocationCallback
 
@@ -98,11 +100,14 @@ class HomeFragment : Fragment() {
         weekRecyclerView.adapter = weekHomeAdapter
         weekRecyclerView.layoutManager = weekLinearLayoutManager
 
+        sharedPreferencesManager = SharedPreferencesManager(requireContext())
+
         homeViewModelFactory = HomeViewModelFactory(
             WeatherRepositoryImp.getInstance(
             WeatherRemoteDataSourceImp.getInstance(),
             WeatherLocalDataSourceImp.getInstance(requireContext())
-        ))
+        ),
+            sharedPreferencesManager)
 
         viewModel = ViewModelProvider(this, homeViewModelFactory).get(HomeViewModel::class.java)
 
@@ -116,7 +121,7 @@ class HomeFragment : Fragment() {
                 latit = location?.latitude ?: 0.0
                 longit = location?.longitude ?: 0.0
                 lifecycleScope.launch {
-                    viewModel.getAllWeathers(latit, longit, "en", "fer")
+                    viewModel.getAllWeathers(latit, longit)
                 }
             }
         }
@@ -163,7 +168,18 @@ class HomeFragment : Fragment() {
         Glide.with(this)
             .load("https://openweathermap.org/img/wn/${weather.list.firstOrNull()?.weather?.firstOrNull()?.icon}@2x.png")
             .into(image)
-        temp.text = "${weather.list.firstOrNull()?.main?.temp.toString()}°C"
+        val temperatureFahrenheit = weather.list.firstOrNull()?.main?.temp
+        val temperatureCelsuis = (temperatureFahrenheit?.minus(273.15))
+        val temperatureFormatted = String.format("%.2f" , temperatureCelsuis)
+        temp.text = "$temperatureFormatted°c"
+
+
+
+
+
+
+
+
         description.text = weather.list.firstOrNull()?.weather?.firstOrNull()?.description.toString()
         humidity.text = "${weather.list.firstOrNull()?.main?.humidity.toString()}%"
         cloud.text = "${weather.list.firstOrNull()?.clouds?.all.toString()}%"
@@ -214,43 +230,3 @@ class HomeFragment : Fragment() {
         fusedLocationClient.removeLocationUpdates(locationCallback)
     }
 }
-
-
-/*
- private lateinit var viewModel: ViewModelProduct
-    private lateinit var adapter: MyAdapter
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main_activity2_products)
-
-
-        val productDao = ProductDatabase.getInstance(applicationContext).getProductDao()
-        val localDataSource = LocalDataSource(productDao)
-        val remoteDataSource = RemoteDataSource(API.retrofitService)
-        val productRepo = ProductRepoImp(localDataSource, remoteDataSource)
-        val viewModelFactory = ViewModelProductFactory(productRepo)
-        viewModel = ViewModelProvider(this,viewModelFactory).get(ViewModelProduct::class.java)
-
-        val recyclerView: RecyclerView = findViewById(R.id.RC)
-        adapter = MyAdapter(emptyList(),this)
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
-
-        viewModel.productList.observe(this, { productList ->
-            adapter.updateData(productList)
-        })
-
-        viewModel.fetchProducts()
-
-    }
-
-    override fun add(product: Product) {
-        viewModel.addToFavorites(product)
-    }
-
-    override fun remove(product: Product) {
-
-    }
- */

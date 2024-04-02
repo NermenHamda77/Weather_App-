@@ -1,29 +1,19 @@
 package com.example.weatherfinalapp.Alert.view
 
-import android.app.AlarmManager
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
-import android.content.Context
+
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.alert.view.AlertViewModel
 import com.example.weatherfinalapp.Alert.viewModel.AlertViewModelFactory
-import com.example.weatherfinalapp.Favorite.view.FavoriteAdapter1
-import com.example.weatherfinalapp.Favorite.viewModel.FavLocationViewModel
-import com.example.weatherfinalapp.Favorite.viewModel.FavLocationViewModelFactory
 import com.example.weatherfinalapp.Network.WeatherRemoteDataSourceImp
 import com.example.weatherfinalapp.R
-import com.example.weatherfinalapp.databinding.FragmentAlertBinding
 import com.example.weatherfinalapp.db.WeatherLocalDataSourceImp
 import com.example.weatherfinalapp.model.Alert
 import com.example.weatherfinalapp.model.WeatherRepositoryImp

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:backgroundTint="@color/startColor"
+    android:backgroundTint="@color/primary"
     android:id="@+id/week_home_card_loc_dets"
     android:layout_marginBottom="10dp"
     android:layout_marginTop="10dp"
@@ -25,8 +25,11 @@
             android:layout_width="43dp"
             android:layout_height="35dp"
             android:layout_gravity="center"
+
             android:layout_margin="16dp"
             android:text="Friday"
+            android:fontFamily="@font/lobster"
+
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -54,6 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="20dp"
+            android:fontFamily="@font/lobster"
             android:text="Clear Sky"
             android:textColor="@color/white"
             android:textSize="16sp"
@@ -65,10 +69,12 @@
 
         <TextView
             android:id="@+id/tv_temp_state_week_card_loc_dets"
-            android:layout_width="118dp"
-            android:layout_height="27dp"
+            android:layout_width="110dp"
+            android:layout_height="0dp"
             android:layout_gravity="center"
             android:layout_marginStart="28dp"
+            android:fontFamily="@font/lobster"
+
             android:text="22/16°C"
             android:textColor="@color/white"
             android:textSize="16sp"

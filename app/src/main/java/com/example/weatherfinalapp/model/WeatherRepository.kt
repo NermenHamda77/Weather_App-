@@ -28,8 +28,8 @@ interface WeatherRepository {
     suspend fun getWeather(
         lat : Double ,
         lon : Double ,
-        units : String? = "metric" ,
-        lang : String? = "en" ,
+        units : String?  ,   //= "metric"
+        lang : String?  ,   //= "en"
         appid : String? = "c687f9659a452c95a84f05c506629873"
     ): Flow<WeatherResponse>
 

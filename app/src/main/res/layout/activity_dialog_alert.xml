@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:cardBackgroundColor="@color/primary"
+    app:cardBackgroundColor="@color/darkOlor"
     app:cardCornerRadius="0dp"
     app:cardElevation="8dp"
     tools:context=".Alert.view.DialogAlertActivity">
@@ -28,7 +28,7 @@
             android:layout_marginTop="4dp"
             android:fontFamily="@font/lobster"
             android:text="@string/add_alert_title"
-            android:textColor="@color/white"
+            android:textColor="@color/startColor"
             android:textSize="32sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -44,8 +44,9 @@
             android:layout_marginTop="30dp"
             android:fontFamily="@font/lobster"
             android:text="@string/select_location_title"
-            android:textColor="@color/white"
+            android:textColor="@color/startColor"
             android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_add_alert" />
 
@@ -66,6 +67,8 @@
             android:layout_marginStart="20dp"
             android:textColor="@color/purple_200"
             android:textSize="16sp"
+            android:fontFamily="@font/lobster"
+
             app:layout_constraintBottom_toBottomOf="@+id/iv_map_btn"
             app:layout_constraintStart_toEndOf="@+id/iv_map_btn"
             app:layout_constraintTop_toTopOf="@+id/iv_map_btn" />
@@ -79,8 +82,9 @@
             android:layout_marginTop="30dp"
             android:fontFamily="@font/lobster"
             android:text="@string/select_date_title"
-            android:textColor="@color/white"
+            android:textColor="@color/startColor"
             android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv_map_btn" />
 
@@ -92,7 +96,7 @@
             app:layout_constraintStart_toStartOf="@+id/tv_select_date"
             app:layout_constraintTop_toBottomOf="@+id/tv_select_date"
             app:srcCompat="@drawable/calendar_icon"
-            android:contentDescription="calendar" />
+            android:contentDescription="@string/calendar" />
 
         <TextView
             android:id="@+id/tv_alert_date_value"
@@ -101,6 +105,7 @@
             android:layout_marginStart="20dp"
             android:textColor="@color/purple_200"
             android:textSize="18sp"
+            android:fontFamily="@font/lobster"
             app:layout_constraintBottom_toBottomOf="@+id/calender_btn"
             app:layout_constraintStart_toEndOf="@+id/calender_btn"
             app:layout_constraintTop_toTopOf="@+id/calender_btn" />
@@ -112,14 +117,15 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="30dp"
             android:fontFamily="@font/lobster"
-            android:text="@string/from"
-            android:textColor="@color/white"
+            android:text="@string/select_time"
+            android:textColor="@color/startColor"
             android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/calender_btn" />
 
         <ImageView
-            android:id="@+id/iv_from_time_btn"
+            android:id="@+id/iv_time_btn"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_marginTop="16dp"
@@ -127,54 +133,21 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/tv_from"
             app:layout_constraintTop_toBottomOf="@+id/tv_from"
+            android:contentDescription="@string/calendar_title"
             app:srcCompat="@drawable/alarm_icon_3" />
 
         <TextView
-            android:id="@+id/tv_from_value"
+            android:id="@+id/tv_time_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:textColor="@color/purple_200"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_from_time_btn"
-            app:layout_constraintStart_toEndOf="@+id/iv_from_time_btn"
-            app:layout_constraintTop_toTopOf="@+id/iv_from_time_btn" />
-
-        <TextView
-            android:id="@+id/tv_to"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="112dp"
-            android:layout_marginBottom="1dp"
             android:fontFamily="@font/lobster"
-            android:text="@string/to"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_from"
-            app:layout_constraintStart_toEndOf="@+id/tv_from"
-            app:layout_constraintTop_toTopOf="@+id/tv_from"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintBottom_toBottomOf="@+id/iv_time_btn"
+            app:layout_constraintStart_toEndOf="@+id/iv_time_btn"
+            app:layout_constraintTop_toTopOf="@+id/iv_time_btn" />
 
-        <ImageView
-            android:id="@+id/iv_to_time_btn"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="12dp"
-            app:layout_constraintEnd_toEndOf="@+id/tv_to"
-            app:layout_constraintHorizontal_bias="0.066"
-            app:layout_constraintStart_toStartOf="@+id/tv_to"
-            app:layout_constraintTop_toBottomOf="@+id/tv_to"
-            app:srcCompat="@drawable/alarm_icon_3" />
 
-        <TextView
-            android:id="@+id/alert_to_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:textColor="@color/purple_200"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_to_time_btn"
-            app:layout_constraintStart_toEndOf="@+id/iv_to_time_btn"
-            app:layout_constraintTop_toTopOf="@+id/iv_to_time_btn"
-            app:layout_constraintVertical_bias="0.636" />
 
         <Button
             android:id="@+id/save_alert_btn"
@@ -182,7 +155,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:layout_weight="1"
-            android:backgroundTint="@color/purple_200"
+            android:backgroundTint="@color/move"
             android:fontFamily="@font/lobster"
             android:text="@string/save"
             android:textSize="20sp"
@@ -201,7 +174,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.366"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_from_time_btn">
+            app:layout_constraintTop_toBottomOf="@+id/iv_time_btn">
 
             <RadioButton
                 android:id="@+id/radio_notification"
@@ -209,7 +182,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/lobster"
                 android:text="@string/notification"
-                android:textColor="@color/white"
+                android:textColor="@color/startColor"
+                android:textStyle="bold"
                 android:textColorHighlight="@color/purple_200"
                 android:textColorLink="@color/purple_200"
                 android:textSize="20sp" />
@@ -222,7 +196,8 @@
                 android:paddingStart="6dp"
                 android:paddingEnd="6dp"
                 android:text="@string/alarm_title"
-                android:textColor="@color/white"
+                android:textColor="@color/startColor"
+                android:textStyle="bold"
                 android:textColorHighlight="@color/purple_200"
                 android:textColorLink="@color/purple_200"
                 android:textSize="20sp" />

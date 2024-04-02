@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    app:cardBackgroundColor="@color/primary"
+    app:cardBackgroundColor="@color/startColor"
     app:cardCornerRadius="16dp"
     app:cardElevation="0dp">
 
@@ -26,7 +26,7 @@
             android:fontFamily="@font/lobster"
             android:gravity="clip_vertical|center_horizontal"
             android:text="Location"
-            android:textColor="@color/white"
+            android:textColor="@color/move"
             android:textSize="24sp"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
             app:layout_constraintTop_toTopOf="parent" />
@@ -48,46 +48,46 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/lobster"
-            android:text="@string/from"
-            android:textColor="@color/white"
+            android:text="@string/date"
+            android:textColor="@color/move"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_location_title" />
 
         <TextView
-            android:id="@+id/tv_from_value_item_list"
+            android:id="@+id/tv_date_value_item_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:fontFamily="@font/lobster"
-            android:text="date"
-            android:textColor="@color/white"
+            android:text="25/10"
+            android:textColor="@color/move"
             app:layout_constraintBottom_toBottomOf="@+id/tv_from_title"
             app:layout_constraintStart_toEndOf="@+id/tv_from_title"
             app:layout_constraintTop_toTopOf="@+id/tv_from_title" />
 
         <TextView
-            android:id="@+id/tv_to_title"
+            android:id="@+id/tv_time_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/lobster"
-            android:text="@string/to"
-            android:textColor="@color/white"
+            android:text="@string/time"
+            android:textColor="@color/move"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="@+id/tv_from_title"
             app:layout_constraintTop_toBottomOf="@+id/tv_from_title" />
 
         <TextView
-            android:id="@+id/tv_to_value_item_list"
+            android:id="@+id/tv_time_value_item_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/lobster"
-            android:text="Date"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_to_title"
-            app:layout_constraintStart_toStartOf="@+id/tv_from_value_item_list"
-            app:layout_constraintTop_toTopOf="@+id/tv_to_title" />
+            android:text="02:00Am"
+            android:textColor="@color/move"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_time_title"
+            app:layout_constraintStart_toStartOf="@+id/tv_date_value_item_list"
+            app:layout_constraintTop_toTopOf="@+id/tv_time_title" />
 
         <ImageView
             android:id="@+id/imageView2"

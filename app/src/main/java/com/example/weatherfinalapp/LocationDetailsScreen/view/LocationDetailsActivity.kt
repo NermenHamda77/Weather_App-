@@ -17,6 +17,7 @@ import com.example.weatherfinalapp.LocationDetailsScreen.viewModel.LocationDetai
 import com.example.weatherfinalapp.LocationDetailsScreen.viewModel.LocationDetailsViewModelFactory
 import com.example.weatherfinalapp.Network.WeatherRemoteDataSourceImp
 import com.example.weatherfinalapp.R
+import com.example.weatherfinalapp.Settings.view.SharedPreferencesManager
 import com.example.weatherfinalapp.db.WeatherLocalDataSourceImp
 import com.example.weatherfinalapp.model.ApiWeather
 import com.example.weatherfinalapp.model.FavoriteLocation
@@ -49,6 +50,9 @@ class LocationDetailsActivity : AppCompatActivity() {
 
     private lateinit var hourLinearLayoutManager: LinearLayoutManager
     private lateinit var weekLinearLayoutManager: LinearLayoutManager
+
+
+    private lateinit var sharedPreferencesManager: SharedPreferencesManager
 
     lateinit var geocoder: Geocoder
     var latit :  Double = 0.0
@@ -94,7 +98,7 @@ class LocationDetailsActivity : AppCompatActivity() {
             WeatherRepositoryImp.getInstance(
                 WeatherRemoteDataSourceImp.getInstance(),
                 WeatherLocalDataSourceImp.getInstance(this)
-            )
+            ), sharedPreferencesManager
         )
 
         geocoder = Geocoder(this)
@@ -120,7 +124,7 @@ class LocationDetailsActivity : AppCompatActivity() {
        // val favLocation = FavoriteLocation(latit, longit, address)
 
         lifecycleScope.launch {
-            viewModel.getAllWeathersOfLoc(latit , longit , "en" , "fer" )
+            viewModel.getAllWeathersOfLoc(latit , longit  )
         }
 
 
@@ -146,7 +150,15 @@ class LocationDetailsActivity : AppCompatActivity() {
                             .load("https://openweathermap.org/img/wn/${weather.list[0].weather[0].icon}@2x.png")
                             .into(image)
 
-                        temp.text = "${weather.list.firstOrNull()?.main?.temp.toString()}°C"
+
+
+                        val temperatureFahrenheit = weather.list.firstOrNull()?.main?.temp
+                        val temperatureCelsuis = (temperatureFahrenheit?.minus(273.15))
+                        val temperatureFormatted = String.format("%.2f" , temperatureCelsuis)
+                        temp.text = "$temperatureFormatted°c"
+
+
+
                         description.text = weather.list.firstOrNull()?.weather?.firstOrNull()?.description.toString()
                         humidity.text = "${weather.list.firstOrNull()?.main?.humidity.toString()}%"
                         cloud.text = "${weather.list.firstOrNull()?.clouds?.all.toString()}%"

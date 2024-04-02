@@ -1,5 +1,7 @@
 package com.example.weatherfinalapp.Settings.view
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,7 +13,7 @@ import com.example.weatherfinalapp.R
 
 
 class SettingsFragment : Fragment() {
-    private lateinit var gpsBtn : RadioButton
+   /* private lateinit var gpsBtn : RadioButton
     private lateinit var mapBtn : RadioButton
     private lateinit var englishBtn : RadioButton
     private lateinit var arabicBtn : RadioButton
@@ -19,15 +21,17 @@ class SettingsFragment : Fragment() {
     private lateinit var kelvinBtn : RadioButton
     private lateinit var fahrenheitBtn : RadioButton
     private lateinit var meterBtn : RadioButton
-    private lateinit var mileBtn : RadioButton
-    private lateinit var enableBtn : RadioButton
-    private lateinit var disableBtn : RadioButton
+    private lateinit var mileBtn : RadioButton*/
 
 
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var sharedPreferencesManager: SharedPreferencesManager
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        sharedPreferences = requireActivity().getSharedPreferences("Settings", Context.MODE_PRIVATE)
+        sharedPreferencesManager = SharedPreferencesManager(requireContext())
 
     }
 
@@ -38,7 +42,7 @@ class SettingsFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
 
-        gpsBtn = view.findViewById(R.id.rbtn_gps_option)
+       /* gpsBtn = view.findViewById(R.id.rbtn_gps_option)
         mapBtn = view.findViewById(R.id.rbtn_map_option)
         englishBtn = view.findViewById(R.id.rbtn_english_option)
         arabicBtn = view.findViewById(R.id.rbtn_arabic_option)
@@ -47,54 +51,89 @@ class SettingsFragment : Fragment() {
         fahrenheitBtn = view.findViewById(R.id.rbtn_fahrenheit_option)
         meterBtn = view.findViewById(R.id.rbtn_meter_sec_option)
         mileBtn = view.findViewById(R.id.rbtn_mile_hr_option)
-        enableBtn = view.findViewById(R.id.rbtn_enable_option)
-        disableBtn = view.findViewById(R.id.rbtn_disable_option)
+*/
 
 
-        gpsBtn.setOnClickListener(View.OnClickListener {
+        val currentUnit = sharedPreferences.getString("unit", "metric")
 
-        })
+        val currentLanguage = sharedPreferences.getString("lang", "en")
 
-        mapBtn.setOnClickListener(View.OnClickListener {
+       // val currentWind = sharedPreferences.getString("" , "")       ////???
 
-        })
+        val radioGroup = view.findViewById<RadioGroup>(R.id.radioGroupUnit)
+        when (currentUnit) {
+            "metric" -> radioGroup.check(R.id.radioButtonMetric)
+            "imperial" -> radioGroup.check(R.id.radioButtonImperial)
+            "standard" -> radioGroup.check(R.id.radioButtonStandard)
+        }
 
-        englishBtn.setOnClickListener(View.OnClickListener {
+        radioGroup.setOnCheckedChangeListener { _, checkedId ->
+            val radioButton = view.findViewById<RadioButton>(checkedId)
+            val selectedUnit = when (radioButton.id) {
+            R.id.radioButtonMetric -> "metric"
+            R.id.radioButtonImperial -> "imperial"
+            R.id.radioButtonStandard -> "standard"
+            else -> "metric"
+        }
+            with(sharedPreferences.edit()) {
+                putString("unit", selectedUnit)
+                apply()
+            }
+            sharedPreferencesManager.saveSelectedUnit(selectedUnit)
+        }
 
-        })
 
-        arabicBtn.setOnClickListener(View.OnClickListener {
+        ///Language
+        val radioGroupLanguage = view.findViewById<RadioGroup>(R.id.radioGroupLanguage)
+        when (currentLanguage) {
+            "en" -> radioGroupLanguage.check(R.id.radioButtonEnglish)
+            "ar"->radioGroupLanguage.check(R.id.radioButtonArabic)
 
-        })
+        }
 
-        celsiusBtn.setOnClickListener(View.OnClickListener {
+        radioGroupLanguage.setOnCheckedChangeListener { _, checkedId ->
+            val radioButton = view.findViewById<RadioButton>(checkedId)
+            val selectedLanguage = when (radioButton.id) {
+                R.id.radioButtonEnglish -> "en"
+                R.id.radioButtonArabic -> "ar"
+                else -> "en"
+            }
+            with(sharedPreferences.edit()) {
+                putString("lang", selectedLanguage)
+                apply()
+            }
+            sharedPreferencesManager.saveSelectedLanguage(selectedLanguage)
+            LanguageUtils.updateLanguage(requireContext(), selectedLanguage)
+        }
 
-        })
 
-        kelvinBtn.setOnClickListener(View.OnClickListener {
+/*
 
-        })
+        //// Wind     ??????????????????????????????????????????
+        val radioGroupWind = view.findViewById<RadioGroup>(R.id.met_sec)
+        when (currentWind) {
+            "" -> radioGroupWind.check(R.id.rbtn_meter_sec_option)
+            ""->radioGroupWind.check(R.id.rbtn_mile_hr_option)
 
-        fahrenheitBtn.setOnClickListener(View.OnClickListener {
+        }
 
-        })
+        radioGroupWind.setOnCheckedChangeListener { _, checkedId ->
+            val radioButton = view.findViewById<RadioButton>(checkedId)
+            val selectedWind = when (radioButton.id) {
+                R.id.rbtn_meter_sec_option -> ""
+                R.id.rbtn_mile_hr_option -> ""
+                else -> ""
+            }
+            with(sharedPreferences.edit()) {
+                putString("", selectedWind)
+                apply()
+            }
+            sharedPreferencesManager.saveSelectedWind(selectedWind)
+            LanguageUtils.updateLanguage(requireContext(), selectedWind)
+        }
 
-        meterBtn.setOnClickListener(View.OnClickListener {
 
-        })
-
-        mileBtn.setOnClickListener(View.OnClickListener {
-
-        })
-
-        enableBtn.setOnClickListener(View.OnClickListener {
-
-        })
-
-        disableBtn.setOnClickListener(View.OnClickListener {
-
-        })
-
+*/
 
 
         return view

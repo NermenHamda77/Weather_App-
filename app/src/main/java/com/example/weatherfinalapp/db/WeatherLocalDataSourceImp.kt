@@ -8,12 +8,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
-class WeatherLocalDataSourceImp private constructor(context: Context) {
+open class WeatherLocalDataSourceImp(context: Context) : WeatherLocalDataSource {
 
     private val weatherDAO : WeatherDAO by lazy {
         val db: AppDataBase = AppDataBase.getInstance(context)
         db.getWeatherDAO()
     }
+
+
 
     companion object {
         private var localSource: WeatherLocalDataSourceImp? = null
@@ -26,35 +28,37 @@ class WeatherLocalDataSourceImp private constructor(context: Context) {
         }
     }
 
-    fun getAllStoredFavLocations(): Flow<List<FavoriteLocation>>{
+
+
+    override  fun getAllStoredFavLocations(): Flow<List<FavoriteLocation>>{
         return weatherDAO.getAllLocations()
     }
 
-    suspend fun addLocation(location: FavoriteLocation) {
+    override suspend fun addLocation(location: FavoriteLocation) {
         CoroutineScope(Dispatchers.IO).launch {
             weatherDAO.insertLocation(location)
         }
     }
 
-    suspend fun removeLocation(location: FavoriteLocation) {
-       CoroutineScope(Dispatchers.IO).launch {
+    override suspend fun removeLocation(location: FavoriteLocation) {
+        CoroutineScope(Dispatchers.IO).launch {
             weatherDAO.deleteLocation(location)
         }
     }
 
 
     /// Alert
-    fun getAllStoredAlerts(): Flow<List<Alert>>{
+    override fun getAllStoredAlerts(): Flow<List<Alert>>{
         return weatherDAO.getAllAlerts()
     }
 
-    suspend fun addAlert(alert: Alert) {
+    override suspend fun addAlert(alert: Alert) {
         CoroutineScope(Dispatchers.IO).launch {
             weatherDAO.insertAlert(alert)
         }
     }
 
-    suspend fun removeAlert(alert: Alert) {
+    override suspend fun removeAlert(alert: Alert) {
         CoroutineScope(Dispatchers.IO).launch {
             weatherDAO.deleteAlert(alert)
         }
@@ -62,4 +66,5 @@ class WeatherLocalDataSourceImp private constructor(context: Context) {
 
 
 }
+
 

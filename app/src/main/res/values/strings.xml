@@ -54,4 +54,12 @@
     <string name="alarm_title">Alarm</string>
     <string name="select_location_title">Select Location</string>
     <string name="locationtitle">LocationTitle</string>
+    <string name="metric_title">Metric</string>
+    <string name="imperial_title">Imperial</string>
+    <string name="standard_title">Standard</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="calendar">calendar</string>
+    <string name="select_time">Select Time</string>
+    <string name="calendar_title">Calendar</string>
 </resources>

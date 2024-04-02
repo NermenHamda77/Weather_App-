@@ -21,8 +21,6 @@ class AlertViewModel(private val _repository: WeatherRepository) : ViewModel()  
         getLocalAlerts()
     }
 
-
-
     suspend fun getAllWeathersOfLoc(lat: Double, lon: Double, lang: String, units: String) {
         viewModelScope.launch {
             _repository.getWeather(lat, lon, units, lang)
@@ -63,34 +61,3 @@ class AlertViewModel(private val _repository: WeatherRepository) : ViewModel()  
 
 }
 
-
-/*
-class FavLocationViewModel(private val _repository: WeatherRepository) : ViewModel() {
-    private var _location: MutableLiveData<List<FavoriteLocation>> =
-        MutableLiveData<List<FavoriteLocation>>()
-    val location: LiveData<List<FavoriteLocation>> get() = _location
-    val _weather: MutableStateFlow<ApiWeather> = MutableStateFlow(ApiWeather.Loading)
-
-    init {
-        getLocalLocations()
-    }
-
-
-    fun removeLocationFromFav(location: FavoriteLocation) {
-        viewModelScope.launch(Dispatchers.IO) {
-            _repository.deleteLocation(location)
-            getLocalLocations()
-        }
-    }
-
-    fun getLocalLocations() {
-        viewModelScope.launch(Dispatchers.IO) {
-            _repository.getStoredFavLocations().collect {
-                _location.postValue(it)
-            }
-        }
-
-    }
-}
-
- */
